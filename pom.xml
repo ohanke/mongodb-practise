@@ -13,9 +13,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>mongodb-practise</name>
 	<description>First spring boot + mongodb project. Spring Data MongoDB at amigoscode.</description>
+
 	<properties>
 		<java.version>18</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
