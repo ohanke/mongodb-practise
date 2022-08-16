@@ -4,6 +4,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,7 +21,7 @@ public class MongodbPractiseApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner(StudentRepository repository){
+	CommandLineRunner runner(StudentRepository repository, MongoTemplate mongoTemplate){
 		return args -> {
 			Adress address = new Adress(
 					"Poland",
@@ -26,17 +29,31 @@ public class MongodbPractiseApplication {
 					"123-456"
 			);
 
-		    Student student = new Student(
+			String email = "oscar.hanke@email.com";
+			Student student = new Student(
 					"Oscar",
 					"Hanke",
-					"oscar.hanke@email.com",
+					email,
 					Gender.MALE,
 					address,
 					List.of("Computer Sciencie", "Maths"),
 					BigDecimal.TEN,
 					LocalDateTime.now());
 
-			repository.insert(student);
+			Query query = new Query();
+			query.addCriteria(Criteria.where("email").is(email));
+			List<Student> students = mongoTemplate.find(query, Student.class);
+
+			if (students.size() > 1){
+				throw new IllegalStateException("Found another student with email: " + email);
+			}
+
+			if (students.isEmpty()){
+				System.out.println("Inserting student: " + student);
+				repository.insert(student);
+			} else {
+				System.out.println(student + " already exists");
+			}
 		};
 	}
 
