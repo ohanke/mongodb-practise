@@ -9,3 +9,4 @@ spring:
       database: amigoscode
       port: 27017
       host: localhost
+      auto-index-creation: true
