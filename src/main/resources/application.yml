@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: mongodb-app
+  data:
+    mongodb:
+      authentication-database: admin
+      username: rootuser
+      password: rootpass
+      database: amigoscode
+      port: 27017
+      host: localhost
