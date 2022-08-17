@@ -26,7 +26,7 @@ public class Student {
     private BigDecimal totalSpentInBooks;
     private LocalDateTime created;
 
-    public Student(String firstName, String lastName, String email, Gender gender, Adress adress, List<String> favouriteSubjects, BigDecimal totalSpentInBooks, LocalDateTime created) {
+    public Student(String firstName, String lastName, String email, Gender gender, Adress adress, List<String> favouriteSubjects, BigDecimal totalSpentInBooks) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -34,6 +34,6 @@ public class Student {
         this.adress = adress;
         this.favouriteSubjects = favouriteSubjects;
         this.totalSpentInBooks = totalSpentInBooks;
-        this.created = created;
+        this.created = LocalDateTime.now();
     }
 }

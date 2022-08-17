@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.query.Query;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 @SpringBootApplication
@@ -29,29 +28,58 @@ public class MongodbPractiseApplication {
 					"123-456"
 			);
 
-			String email = "oscar.hanke@email.com";
-			Student student = new Student(
+			Student student1 = new Student(
 					"Oscar",
 					"Hanke",
-					email,
+					"oscar.hanke@email.com",
 					Gender.MALE,
 					address,
 					List.of("Computer Sciencie", "Maths"),
-					BigDecimal.TEN,
-					LocalDateTime.now());
+					BigDecimal.TEN
+			);
+//			student1.setCreated(LocalDateTime.now());
+			insertUser(repository, student1.getEmail(), student1);
+
+			Student student2 = new Student(
+					"Marian",
+					"Kowalski",
+					"marian.kowalski@email.com",
+					Gender.MALE,
+					address,
+					List.of("Computer Sciencie"),
+					BigDecimal.TEN
+			);
+//			student2.setCreated(LocalDateTime.now());
+			insertUser(repository, student2.getEmail(), student2);
+
+			Student student3 = new Student(
+					"Josh",
+					"Bosh",
+					"josh.bosh@email.com",
+					Gender.MALE,
+					address,
+					List.of("Maths"),
+					BigDecimal.TEN
+			);
+//			student3.setCreated(LocalDateTime.now());
+			insertUser(repository, student3.getEmail(), student3);
 
 //			usingMongoTemplateAndQuery(repository, mongoTemplate, email, student);
 
-			repository.findStudentByEmail(email).ifPresentOrElse(
-					s -> {
-						System.out.println(s + " already exists");
-					},
-					() -> {
-						System.out.println("Inserting student: " + student);
-						repository.insert(student);
-					}
-			);
+
 		};
+	}
+
+	private void insertUser(StudentRepository repository, String email, Student student) {
+		repository.findByEmail(email).ifPresentOrElse(
+				s -> {
+					System.out.println(s + " already exists");
+				},
+				() -> {
+					System.out.println("Inserting student: " + student);
+					repository.insert(student);
+				}
+		);
 	}
 
 	private static void usingMongoTemplateAndQuery(StudentRepository repository, MongoTemplate mongoTemplate, String email, Student student) {
