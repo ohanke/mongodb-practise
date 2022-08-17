@@ -40,21 +40,35 @@ public class MongodbPractiseApplication {
 					BigDecimal.TEN,
 					LocalDateTime.now());
 
-			Query query = new Query();
-			query.addCriteria(Criteria.where("email").is(email));
-			List<Student> students = mongoTemplate.find(query, Student.class);
+//			usingMongoTemplateAndQuery(repository, mongoTemplate, email, student);
 
-			if (students.size() > 1){
-				throw new IllegalStateException("Found another student with email: " + email);
-			}
-
-			if (students.isEmpty()){
-				System.out.println("Inserting student: " + student);
-				repository.insert(student);
-			} else {
-				System.out.println(student + " already exists");
-			}
+			repository.findStudentByEmail(email).ifPresentOrElse(
+					s -> {
+						System.out.println(s + " already exists");
+					},
+					() -> {
+						System.out.println("Inserting student: " + student);
+						repository.insert(student);
+					}
+			);
 		};
+	}
+
+	private static void usingMongoTemplateAndQuery(StudentRepository repository, MongoTemplate mongoTemplate, String email, Student student) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("email").is(email));
+		List<Student> students = mongoTemplate.find(query, Student.class);
+
+		if (students.size() > 1){
+			throw new IllegalStateException("Found another student with email: " + email);
+		}
+
+		if (students.isEmpty()){
+			System.out.println("Inserting student: " + student);
+			repository.insert(student);
+		} else {
+			System.out.println(student + " already exists");
+		}
 	}
 
 }
