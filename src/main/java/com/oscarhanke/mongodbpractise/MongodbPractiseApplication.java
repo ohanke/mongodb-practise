@@ -37,7 +37,6 @@ public class MongodbPractiseApplication {
 					List.of("Computer Sciencie", "Maths"),
 					BigDecimal.TEN
 			);
-//			student1.setCreated(LocalDateTime.now());
 			insertUser(repository, student1.getEmail(), student1);
 
 			Student student2 = new Student(
@@ -49,7 +48,6 @@ public class MongodbPractiseApplication {
 					List.of("Computer Sciencie"),
 					BigDecimal.TEN
 			);
-//			student2.setCreated(LocalDateTime.now());
 			insertUser(repository, student2.getEmail(), student2);
 
 			Student student3 = new Student(
@@ -61,20 +59,15 @@ public class MongodbPractiseApplication {
 					List.of("Maths"),
 					BigDecimal.TEN
 			);
-//			student3.setCreated(LocalDateTime.now());
 			insertUser(repository, student3.getEmail(), student3);
 
 //			usingMongoTemplateAndQuery(repository, mongoTemplate, email, student);
-
-
 		};
 	}
 
 	private void insertUser(StudentRepository repository, String email, Student student) {
 		repository.findByEmail(email).ifPresentOrElse(
-				s -> {
-					System.out.println(s + " already exists");
-				},
+				s -> System.out.println(s + " already exists"),
 				() -> {
 					System.out.println("Inserting student: " + student);
 					repository.insert(student);

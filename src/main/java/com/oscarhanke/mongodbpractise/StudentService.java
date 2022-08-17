@@ -34,7 +34,6 @@ public class StudentService {
                     body.getFavouriteSubjects(),
                     body.getTotalSpentInBooks()
             );
-//            student.setCreated(LocalDateTime.now());
             return studentRepository.insert(student);
         }
     }
