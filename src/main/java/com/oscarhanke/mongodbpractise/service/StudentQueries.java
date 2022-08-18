@@ -8,6 +8,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.TextCriteria;
+import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,5 +43,17 @@ public class StudentQueries {
         Query subjects = Query.query(Criteria.where("subjects").in(subject));
 
         return this.mongoTemplate.find(subjects, Student.class);
+    }
+
+    public List<Student> findByFreeText(String text){
+        TextCriteria textCriteria = TextCriteria
+                .forDefaultLanguage()
+                .matching(text);
+
+        Query byFreeText = TextQuery.queryText(textCriteria)
+                .sortByScore()
+                .with(PageRequest.of(0, 3));
+
+        return this.mongoTemplate.find(byFreeText, Student.class);
     }
 }

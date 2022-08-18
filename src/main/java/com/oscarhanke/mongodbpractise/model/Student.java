@@ -26,6 +26,7 @@ public class Student {
     private Gender gender;
     private Adress adress;
     @Field("subjects")
+    @TextIndexed(weight = 3)
     private List<String> favouriteSubjects;
     private BigDecimal totalSpentInBooks;
     private LocalDateTime created;

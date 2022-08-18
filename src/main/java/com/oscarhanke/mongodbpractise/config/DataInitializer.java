@@ -77,6 +77,10 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
         List<Student> bySubjects = this.studentQueries.findByFavouriteSubjects("Maths");
         System.out.println(bySubjects);
 
+        log.info("studentQueries.findByFreeText");
+        List<Student> studentByFreeText = studentQueries.findByFreeText("Maths");
+        System.out.println(studentByFreeText);
+
 //			usingMongoTemplateAndQuery(repository, mongoTemplate, email, student);
     }
 
