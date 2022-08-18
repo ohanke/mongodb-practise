@@ -3,6 +3,7 @@ package com.oscarhanke.mongodbpractise.service;
 import com.oscarhanke.mongodbpractise.model.Student;
 import com.oscarhanke.mongodbpractise.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +17,7 @@ public class StudentService {
     private final StudentRepository studentRepository;
 
     public List<Student> getAllStudent() {
-        return studentRepository.findAll();
+        return studentRepository.findAll(Sort.by("firstName").ascending());
     }
 
     public Student getByEmail(String email) {
