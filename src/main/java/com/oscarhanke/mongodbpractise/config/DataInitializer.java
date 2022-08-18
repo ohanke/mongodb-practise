@@ -1,5 +1,10 @@
-package com.oscarhanke.mongodbpractise;
+package com.oscarhanke.mongodbpractise.config;
 
+import com.oscarhanke.mongodbpractise.model.Adress;
+import com.oscarhanke.mongodbpractise.model.Gender;
+import com.oscarhanke.mongodbpractise.model.Student;
+import com.oscarhanke.mongodbpractise.repository.StudentRepository;
+import com.oscarhanke.mongodbpractise.service.StudentQueries;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
@@ -17,6 +22,7 @@ import java.util.List;
 public class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
     private final StudentRepository studentRepository;
+    private final StudentQueries studentQueries;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -53,6 +59,23 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
                 address,
                 List.of("Maths"),
                 BigDecimal.TEN));
+
+
+        List<Student> allStudents = this.studentQueries.findAll("firstName", 0, 3);
+        log.info("StudentQueries.findAll() result");
+        System.out.println(allStudents);
+
+        log.info("StudentQueries.findSingleById() result");
+        Student byId = this.studentQueries.findSingleById("62fe2f083de3924a48a3c8cb");
+        System.out.println(byId);
+
+        log.info("StudentQueries.countMales() result");
+        long males = this.studentQueries.countMales();
+        System.out.println(males);
+
+        log.info("StudentQueries.findByFavouriteSubjects() result");
+        List<Student> bySubjects = this.studentQueries.findByFavouriteSubjects("Maths");
+        System.out.println(bySubjects);
 
 //			usingMongoTemplateAndQuery(repository, mongoTemplate, email, student);
     }

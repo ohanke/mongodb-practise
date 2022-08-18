@@ -1,5 +1,7 @@
-package com.oscarhanke.mongodbpractise;
+package com.oscarhanke.mongodbpractise.service;
 
+import com.oscarhanke.mongodbpractise.model.Student;
+import com.oscarhanke.mongodbpractise.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,5 +1,6 @@
-package com.oscarhanke.mongodbpractise;
+package com.oscarhanke.mongodbpractise.repository;
 
+import com.oscarhanke.mongodbpractise.model.Student;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

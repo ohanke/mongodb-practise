@@ -1,27 +1,31 @@
-package com.oscarhanke.mongodbpractise;
+package com.oscarhanke.mongodbpractise.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 @Data
-@Document
+@Document("students")
 public class Student {
 
     @Id
     private String id;
+    @TextIndexed
     private String firstName;
+    @TextIndexed(weight = 2)
     private String lastName;
     @Indexed(unique = true)
     private String email;
     private Gender gender;
     private Adress adress;
+    @Field("subjects")
     private List<String> favouriteSubjects;
     private BigDecimal totalSpentInBooks;
     private LocalDateTime created;

@@ -1,5 +1,7 @@
-package com.oscarhanke.mongodbpractise;
+package com.oscarhanke.mongodbpractise.controller;
 
+import com.oscarhanke.mongodbpractise.model.Student;
+import com.oscarhanke.mongodbpractise.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

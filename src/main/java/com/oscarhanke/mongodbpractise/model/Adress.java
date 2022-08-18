@@ -1,4 +1,4 @@
-package com.oscarhanke.mongodbpractise;
+package com.oscarhanke.mongodbpractise.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
