@@ -14,7 +14,6 @@ public class DatabaseTestConfiguration {
     GenericCascadeListener genericCascadeListener(MongoTemplate mongoTemplate){
         return new GenericCascadeListener(mongoTemplate);
     }
-
     @Bean
     public MongoDatabaseFactory mongoDatabaseFactory(){
         return new SimpleMongoClientDatabaseFactory("mongodb://localhost:27017/db-tests -u rootuser -p rootpass");

@@ -1,14 +1,19 @@
 package com.oscarhanke.mongodbpractise.service;
 
+import com.oscarhanke.mongodbpractise.DatabaseTestConfiguration;
 import com.oscarhanke.mongodbpractise.MongodbPractiseApplicationTests;
 import com.oscarhanke.mongodbpractise.model.Adress;
 import com.oscarhanke.mongodbpractise.model.Gender;
 import com.oscarhanke.mongodbpractise.model.Student;
 import com.oscarhanke.mongodbpractise.repository.StudentRepository;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -21,7 +26,8 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class StudentServiceUnitTest extends MongodbPractiseApplicationTests {
+
+class StudentServiceUnitTest extends MongodbPractiseApplicationTests{
 
     List<Student> students;
     Student student;
