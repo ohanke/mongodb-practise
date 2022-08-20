@@ -16,12 +16,12 @@ public class StudentController {
 
     @GetMapping
     public List<Student> getAll(){
-        return studentService.getAllStudent();
+        return studentService.findAll();
     }
 
     @GetMapping("{email}")
     public Student getByEmail(@PathVariable String email){
-        return studentService.getByEmail(email);
+        return studentService.findByEmail(email);
     }
 
     @PostMapping
@@ -36,7 +36,7 @@ public class StudentController {
 
     @DeleteMapping("{email}")
     public void delete(@PathVariable String email){
-        studentService.deleteById(email);
+        studentService.deleteByEmail(email);
     }
 
     @DeleteMapping

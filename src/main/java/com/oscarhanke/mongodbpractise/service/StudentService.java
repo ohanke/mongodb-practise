@@ -3,7 +3,6 @@ package com.oscarhanke.mongodbpractise.service;
 import com.oscarhanke.mongodbpractise.model.Student;
 import com.oscarhanke.mongodbpractise.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +15,11 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
-    public List<Student> getAllStudent() {
-        return studentRepository.findAll(Sort.by("firstName").ascending());
+    public List<Student> findAll() {
+        return studentRepository.findAll();
     }
 
-    public Student getByEmail(String email) {
+    public Student findByEmail(String email) {
         return studentRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalStateException("Student with email: " + email + " not found"));
     }
@@ -49,18 +48,24 @@ public class StudentService {
     }
 
     private Student performUpdate(Student body, Student student) {
-        student.setFirstName(body.getFirstName());
-        student.setLastName(body.getLastName());
-        student.setEmail(body.getEmail());
-        student.setGender(body.getGender());
-        student.setAdress(body.getAdress());
-        student.setFavouriteSubjects(body.getFavouriteSubjects());
-        student.setTotalSpentInBooks(body.getTotalSpentInBooks());
-        student.setCreated(body.getCreated());
-        return student;
+        if (body.getFirstName() != null)
+            student.setFirstName(body.getFirstName());
+        if (body.getLastName() != null)
+            student.setLastName(body.getLastName());
+        if (body.getGender() != null)
+            student.setGender(body.getGender());
+        if (body.getAdress() != null)
+            student.setAdress(body.getAdress());
+        if (body.getFavouriteSubjects() != null)
+            student.setFavouriteSubjects(body.getFavouriteSubjects());
+        if (body.getTotalSpentInBooks() != null)
+            student.setTotalSpentInBooks(body.getTotalSpentInBooks());
+        if (body.getCreated() != null)
+            student.setCreated(body.getCreated());
+        return studentRepository.save(student);
     }
 
-    public void deleteById(String email) {
+    public void deleteByEmail(String email) {
         studentRepository.deleteByEmail(email);
     }
 
