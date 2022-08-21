@@ -1,6 +1,5 @@
 package com.oscarhanke.mongodbpractise.service;
 
-import com.oscarhanke.mongodbpractise.DatabaseTestConfiguration;
 import com.oscarhanke.mongodbpractise.MongodbPractiseApplicationTests;
 import com.oscarhanke.mongodbpractise.model.Adress;
 import com.oscarhanke.mongodbpractise.model.Gender;
@@ -13,6 +12,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -25,10 +25,9 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//@DataMongoTest
-//@ExtendWith(SpringExtension.class)
-//@Import(DatabaseTestConfiguration.class)
-class StudentServiceIntegrationTest extends MongodbPractiseApplicationTests{
+
+@DataMongoTest
+class StudentServiceIntegrationTest {
 
     String sampleEmail;
     @Autowired

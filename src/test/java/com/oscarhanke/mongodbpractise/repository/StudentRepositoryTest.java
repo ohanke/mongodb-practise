@@ -1,6 +1,5 @@
 package com.oscarhanke.mongodbpractise.repository;
 
-import com.oscarhanke.mongodbpractise.DatabaseTestConfiguration;
 import com.oscarhanke.mongodbpractise.model.Adress;
 import com.oscarhanke.mongodbpractise.model.Gender;
 import com.oscarhanke.mongodbpractise.model.Student;
@@ -18,11 +17,8 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @DataMongoTest
 @ExtendWith(SpringExtension.class)
-@Import(DatabaseTestConfiguration.class)
 class StudentRepositoryTest {
 
     @Autowired
